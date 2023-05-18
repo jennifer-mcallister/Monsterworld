@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <MyMonsters></MyMonsters>
   },
   {
-    path: "/:id",
+    path: "monsters/:id",
     element: <MonsterView></MonsterView>
   },
   {
