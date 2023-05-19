@@ -8,22 +8,24 @@ interface IAppearance {
     face: string[]
 }
 
+const appearances: IAppearance = {
+    body: ["fluffyGreen", "fluffyGrey", "fluffyRed", "hornsGrey", "hornsPurple", "hornsRed"],
+    face: ["evil", "grumpy", "kawaii"]
+};
+
 export const CreateMonster = () => {
 
     const [monsters, setMonsters] = useState<Monster[]>(JSON.parse(localStorage.getItem("monsters") || "[]"));
     const [currentMonster, setCurrentMonster] = useState<Monster>({
         id: new Date().getTime().toString(),
         monsterName: "",
-        body: "hornsPurple",
-        face: "kawaii",
+        body: appearances.body[0],
+        face: appearances.face[0],
         hungry: false,
         lastFed: new Date(),
     });
 
-    const appearances: IAppearance = {
-        body: ["fluffyGreen", "fluffyGrey", "fluffyRed", "hornsGrey", "hornsPurple", "hornsRed"],
-        face: ["evil", "grumpy", "kawaii"]
-    };
+
 
     const handleSubmit = (e: FormEvent) => {
         setMonsters([...monsters, currentMonster]);
@@ -39,33 +41,52 @@ export const CreateMonster = () => {
         }
     }
 
-    const handleClickBackward = () => {
-        
-
+    const handlePreviousBody = () => {
+        const currentBody = appearances.body.findIndex(body => body === currentMonster.body)
+        if (currentBody > 0) {
+            setCurrentMonster({...currentMonster, body: appearances.body[currentBody - 1]})
+        }
     }
 
-    const handleClickForward = () => {
+    const handleNextBody = () => {
+        const currentBody = appearances.body.findIndex(body => body === currentMonster.body)
+        if (currentBody < (appearances.body.length - 1)) {
+            setCurrentMonster({...currentMonster, body: appearances.body[currentBody + 1]})
+        }
+    }
 
+    const handlePreviousFace = () => {
+        const currentFace = appearances.face.findIndex(face => face === currentMonster.face)
+        if (currentFace > 0) {
+            setCurrentMonster({...currentMonster, face: appearances.face[currentFace - 1]})
+        }
+    }
+
+    const handleNextFace = () => {
+        const currentFace = appearances.face.findIndex(face => face === currentMonster.face)
+        if (currentFace < (appearances.face.length - 1)) {
+            setCurrentMonster({...currentMonster, face: appearances.face[currentFace + 1]})
+        }
     }
 
     return(
         <div>
             <Nav></Nav>
             <h1>Monster creater</h1>
+            <Monsters monster={currentMonster}></Monsters>
             <form onSubmit={handleSubmit}>
                 <input placeholder="name" type="text" value={currentMonster.monsterName} onChange={handleChange} name="monsterName" />
-                <div className="appearance-options-container">
-                    <button onClick={handleClickBackward}>Back</button>
-                    <p>{currentMonster.body}</p>
-                    <button onClick={handleClickForward}>Next</button>
-                </div>
-                <div className="appearance-options-container">
-                    <button onClick={handleClickBackward}>Back</button>
-                    <p>{currentMonster.face}</p>
-                    <button onClick={handleClickForward}>Next</button>
-                </div>
             </form>
-            <Monsters monster={currentMonster}></Monsters>
+            <div className="appearance-options-container">
+                    <button onClick={handlePreviousBody}>Back</button>
+                    <p>{currentMonster.body}</p>
+                    <button onClick={handleNextBody}>Next</button>
+                </div>
+                <div className="appearance-options-container">
+                    <button onClick={handlePreviousFace}>Back</button>
+                    <p>{currentMonster.face}</p>
+                    <button onClick={handleNextFace}>Next</button>
+                </div> 
         </div>
     )
 }

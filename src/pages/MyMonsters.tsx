@@ -15,11 +15,13 @@ export const MyMonsters = () => {
         <>
             <Nav></Nav>
             <h1>My Monsters</h1>
-            {monsters.map(m => (
-                <Link key={m.id} to={m.id}>
-                    <Monsters monster={m}></Monsters>
-                </Link>
-            ))}
+            <div className="monsters-container">
+                {monsters.map(m => (
+                    <Link key={m.id} to={m.id}>
+                        <Monsters monster={m}></Monsters>
+                    </Link>
+                ))}
+            </div>
         </>
     )
 }

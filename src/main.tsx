@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { MyMonsters } from './pages/MyMonsters';
 import { MonsterView } from './pages/Monsterview';
 import { CreateMonster } from './pages/CreateMonster';
+import { Shop } from './pages/Shop';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLDivElement
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/create",
     element: <CreateMonster></CreateMonster>
+  },
+  {  
+    path: "/shop",
+    element: <Shop></Shop>
   }
 ]);
 

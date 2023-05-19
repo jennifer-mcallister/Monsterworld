@@ -45,7 +45,6 @@ export const Monsters = ({monster}: IMonster ) => {
     const face = images.faces.find((face) => face.type === monster.face);
     return(
         <div className="monster-container">
-            <p>{monster.monsterName}</p>
             <div className="img-container">
                 <img className="monster-body" src={body?.img}/>
                 <img className="monster-face" src={face?.img}/>
