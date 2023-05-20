@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Nav } from "../components/Nav";
 import { Monster } from "../models/Monster";
 import { Monsters } from "../components/Monsters";
+import { IPlayer } from "../models/IPlayer";
 
 interface IAppearance {
     body: string[],
@@ -12,6 +13,8 @@ const appearances: IAppearance = {
     body: ["fluffyGreen", "fluffyGrey", "fluffyRed", "hornsGrey", "hornsPurple", "hornsRed"],
     face: ["evil", "grumpy", "kawaii"]
 };
+
+const player = JSON.parse(localStorage.getItem("player") || "{}");
 
 export const CreateMonster = () => {
 
@@ -31,7 +34,14 @@ export const CreateMonster = () => {
         setMonsters([...monsters, currentMonster]);
         localStorage.setItem("monsters", JSON.stringify([...monsters, currentMonster]));
         setCurrentMonster({...currentMonster, monsterName:""})
+        player ? createNewPlayer() : "";
+        
         e.preventDefault();
+    }
+
+    const createNewPlayer = () => {
+        const player: IPlayer = {coins: 0, inventory: []} 
+        localStorage.setItem("player", JSON.stringify({...player, coins: player.coins + 1}));
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

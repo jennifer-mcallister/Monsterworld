@@ -168,7 +168,7 @@ img {
   gap: 1rem;
 }
 
-.shopgood-container {
+.item-container {
   border: solid 2px black;
   background-color: #ff6bc6;
   border-radius: 15px;
@@ -177,6 +177,17 @@ img {
   justify-content: center;
   align-items: center;
   color: black;
-  gap: 5px;
+  gap: 0.5rem;
   padding: 1rem;
+}
+
+.inventory > .img-container {
+  width: 5em;
+  height: 5rem;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
 }

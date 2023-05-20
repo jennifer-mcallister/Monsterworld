@@ -22,7 +22,7 @@ export const Shop = () => {
             <Nav></Nav>
             <h1>Shop</h1>
             {shopItems.map((item) => (
-                <div key={item.id} className="shopgood-container" onClick={() => {
+                <div key={item.id} className="shopgood-container item-container" onClick={() => {
                     const action: IAction = {
                         type: ActionType.BUY_PRODUCT,
                         payload: item,
